@@ -1,2 +1,2 @@
 # flights
-python flights scrpae
+python flights scrape prices from the web

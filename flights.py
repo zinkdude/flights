@@ -1,7 +1,7 @@
 """
 
 python script -
-Jeff Zinkerman = 2/21/2018
+Jeff Zinkerman = 5/21/2018
 
 1) Download Table HTML Data from walmart web site
     https://www.orbitz.com...
