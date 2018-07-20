@@ -37,14 +37,14 @@ url_list = []
 
 def create_urls():
     #Read from file and assign to an array
-    in_file = urlgenflights.url_file   # should be '\\\\bpfilead02\\share\\zink\\bpproj\\webscrape\\flights\\next_urls.txt'
+    in_file = urlgenflights.url_file  
     with io.open(in_file) as f:
         for newline in f.readlines():
             url_list.append(newline.rstrip())    
     
 def insert_new_db() :
     try :
-        db_engine1 = sqlalchemy.create_engine("mysql+mysqldb://jzink:###zink05###@bpmysqlcloud.cpmq3uxtagei.us-east-1.rds.amazonaws.com/" + MYSQL_SCHEMA_NAME, echo_pool=True)
+        db_engine1 = sqlalchemy.create_engine("mysql+mysqldb://xxxxxx/" + MYSQL_SCHEMA_NAME, echo_pool=True)
         res = db_engine1.execute(text(SQL_CMD).execution_options(autocommit=True))
         #print(res.name)
     except Exception as e:
@@ -56,11 +56,11 @@ def write_db(df1, db_action):
     # write the DataFrame to a table in the sql database
     try :
         if (MY_SQL_FLAG ==1) :
-            db_engine = sqlalchemy.create_engine("mysql+mysqldb://jzink:###zink05###@bpmysqlcloud.cpmq3uxtagei.us-east-1.rds.amazonaws.com/" + MYSQL_SCHEMA_NAME, echo_pool=True)
+            db_engine = sqlalchemy.create_engine("mysql+mysqldb:/xxxxxx/" + MYSQL_SCHEMA_NAME, echo_pool=True)
             # mysql adjustments - explicitly give string length as 50 and make table name lower case
             df1.to_sql("temp_flights_scrape", db_engine, if_exists=db_action, index=True, dtype={'date_added': DateTime, 'flight_date': DateTime, 'class': sqlalchemy.types.Integer, 'stops': sqlalchemy.types.Integer, 'page_title' : String(250), 'plane' : String(50)})
         else :
-            db_engine = sqlalchemy.create_engine("mssql+pyodbc://ptsuser:pts1001@dsn_dbQuant")
+            db_engine = sqlalchemy.create_engine("mssql+pyodbc://ptsuser:xxxxxx@dsn_dbQuant")
             df1.to_sql("temp_flights_scrape", db_engine, if_exists=db_action, index=True, dtype={'date_added': DateTime, 'flight_date': DateTime, 'class': sqlalchemy.types.Integer, 'stops': sqlalchemy.types.Integer, 'page_title' : String(250), 'plane' : String(50)})
     except Exception as e:
         print('Error writing to SQL Table',str(e),'\n')
