@@ -60,7 +60,7 @@ def write_db(df1, db_action):
             # mysql adjustments - explicitly give string length as 50 and make table name lower case
             df1.to_sql("temp_flights_scrape", db_engine, if_exists=db_action, index=True, dtype={'date_added': DateTime, 'flight_date': DateTime, 'class': sqlalchemy.types.Integer, 'stops': sqlalchemy.types.Integer, 'page_title' : String(250), 'plane' : String(50)})
         else :
-            db_engine = sqlalchemy.create_engine("mssql+pyodbc://ptsuser:xxxxxx@dsn_dbQuant")
+            db_engine = sqlalchemy.create_engine("mssql+pyodbc://zzz:xxxxxx@dsn_dbQuant")
             df1.to_sql("temp_flights_scrape", db_engine, if_exists=db_action, index=True, dtype={'date_added': DateTime, 'flight_date': DateTime, 'class': sqlalchemy.types.Integer, 'stops': sqlalchemy.types.Integer, 'page_title' : String(250), 'plane' : String(50)})
     except Exception as e:
         print('Error writing to SQL Table',str(e),'\n')
